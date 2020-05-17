@@ -1,0 +1,53 @@
+{
+    "name": "ohseesoftware/laravel-package-boilerplate",
+    "description": "Describe your package here.",
+    "keywords": [
+        "ohseesoftware",
+        "laravel"
+    ],
+    "homepage": "https://github.com/ohseesoftware/laravel-package-boilerplate",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Owen Conti",
+            "email": "owen@ohseemedia.com"
+        }
+    ],
+    "require": {
+        "php": "^7.3"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^5.0",
+        "php-coveralls/php-coveralls": "^2.2",
+        "phpunit/phpunit": "^8.5",
+        "squizlabs/php_codesniffer": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "OhSeeSoftware\\LaravelServerAnalytics\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "OhSeeSoftware\\LaravelServerAnalytics\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "OhSeeSoftware\\LaravelServerAnalytics\\LaravelServerAnalyticsServiceProvider"
+            ],
+            "aliases": {
+                "LaravelServerAnalytics": "OhSeeSoftware\\LaravelServerAnalytics\\ServerAnalytics"
+            }
+        }
+    }
+}
