@@ -1,6 +1,6 @@
 <?php
 
-namespace OhSeeSoftware\LaravelPackageBoilerplate\Tests;
+namespace OhSeeSoftware\LaravelQueueFake\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\TestCase as TestbenchTestCase;
@@ -25,7 +25,7 @@ class TestCase extends TestbenchTestCase
 
     protected function getPackageProviders($app)
     {
-        return [\OhSeeSoftware\LaravelPackageBoilerplate\Tests\TestServiceProvider::class];
+        return [];
     }
 
     /**

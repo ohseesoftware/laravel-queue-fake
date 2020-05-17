@@ -1,11 +1,11 @@
 {
-    "name": "ohseesoftware/laravel-package-boilerplate",
+    "name": "ohseesoftware/laravel-queue-fake",
     "description": "Describe your package here.",
     "keywords": [
         "ohseesoftware",
         "laravel"
     ],
-    "homepage": "https://github.com/ohseesoftware/laravel-package-boilerplate",
+    "homepage": "https://github.com/ohseesoftware/laravel-queue-fake",
     "license": "MIT",
     "type": "library",
     "authors": [
@@ -15,7 +15,8 @@
         }
     ],
     "require": {
-        "php": "^7.3"
+        "php": "^7.3",
+        "illuminate/support": ">6.0"
     },
     "require-dev": {
         "orchestra/testbench": "^5.0",
@@ -25,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "OhSeeSoftware\\LaravelServerAnalytics\\": "src"
+            "OhSeeSoftware\\LaravelQueueFake\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "OhSeeSoftware\\LaravelServerAnalytics\\Tests\\": "tests"
+            "OhSeeSoftware\\LaravelQueueFake\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -39,15 +40,5 @@
     },
     "config": {
         "sort-packages": true
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "OhSeeSoftware\\LaravelServerAnalytics\\LaravelServerAnalyticsServiceProvider"
-            ],
-            "aliases": {
-                "LaravelServerAnalytics": "OhSeeSoftware\\LaravelServerAnalytics\\ServerAnalytics"
-            }
-        }
     }
 }

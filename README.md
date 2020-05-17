@@ -1,31 +1,54 @@
-# Laravel Package Boilerplate
+# Laravel Queue Fake
 
-[![Current Release](https://img.shields.io/github/release/ohseesoftware/laravel-package-boilerplate.svg?style=flat-square)](https://github.com/ohseesoftware/laravel-package-boilerplate/releases)
-![Build Status Badge](https://github.com/ohseesoftware/laravel-package-boilerplate/workflows/Build/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/github/ohseesoftware/laravel-package-boilerplate/badge.svg?branch=master)](https://coveralls.io/github/ohseesoftware/laravel-package-boilerplate?branch=master)
-[![Maintainability Score](https://img.shields.io/codeclimate/maintainability/ohseesoftware/laravel-package-boilerplate.svg?style=flat-square)](https://codeclimate.com/github/ohseesoftware/laravel-package-boilerplate)
-[![Downloads](https://img.shields.io/packagist/dt/ohseesoftware/laravel-package-boilerplate.svg?style=flat-square)](https://packagist.org/packages/ohseesoftware/laravel-package-boilerplate)
-[![MIT License](https://img.shields.io/github/license/ohseesoftware/laravel-package-boilerplate.svg?style=flat-square)](https://github.com/ohseesoftware/laravel-package-boilerplate/blob/master/LICENSE)
+[![Current Release](https://img.shields.io/github/release/ohseesoftware/laravel-queue-fake.svg?style=flat-square)](https://github.com/ohseesoftware/laravel-queue-fake/releases)
+![Build Status Badge](https://github.com/ohseesoftware/laravel-queue-fake/workflows/Build/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/ohseesoftware/laravel-queue-fake/badge.svg?branch=master)](https://coveralls.io/github/ohseesoftware/laravel-queue-fake?branch=master)
+[![Maintainability Score](https://img.shields.io/codeclimate/maintainability/ohseesoftware/laravel-queue-fake.svg?style=flat-square)](https://codeclimate.com/github/ohseesoftware/laravel-queue-fake)
+[![Downloads](https://img.shields.io/packagist/dt/ohseesoftware/laravel-queue-fake.svg?style=flat-square)](https://packagist.org/packages/ohseesoftware/laravel-queue-fake)
+[![MIT License](https://img.shields.io/github/license/ohseesoftware/laravel-queue-fake.svg?style=flat-square)](https://github.com/ohseesoftware/laravel-queue-fake/blob/master/LICENSE)
 
-## TODO:
+# Overview
 
--   Search and replace "laravel-package-boilerplate" with the name of the new package
--   Search and replace "OhSeeSoftware\LaravelPackageBoilerplate" with the namespace of the new package
--   Change the names of the example classes (ExampleServiceProvider, ExampleFacade, etc)
+There may be times in your Laravel tests where you want to fake the Queue just for a couple lines, and then revert to the real queue after. This package makes that super simple to do:
 
-### Coverage reporting
+```php
+// Given
 
--   If you want to report on code coverage, setup the repo at [https://coveralls.io](https://coveralls.io)
--   Update the Coveralls image URL in this README file
+// Queue is real there
 
-### Maintainability score
+// When
+QueueFake::wrap(function () use (&$value) {
+    // Queue is faked inside this function
+});
 
--   If you want to report on code maintainability, setup the repo at [https://codeclimate.com](https://codeclimate.com)
--   Update the Code Climate image URL in this README file
+// Queue is back to normal here
+```
 
-### Write documentation
+# Installation
 
--   Remove this TODO section and replace with documentation for your package!
+`composer require ohseesoftware/laravel-queue-fake`
+
+# Usage
+
+Image you need to fake the queue to call your factories to setup your models, but also want to test a job:
+
+```php
+// Given
+$user = null;
+QueueFake::wrap(function () use (&$user) {
+    // Queue is faked inside this function
+    $user = factory(User::class)->create();
+});
+
+// When
+// Queue is back to normal so we can dispatch, etc
+SomeJob::dispatch($user);
+
+// Then
+$this->assertDatabaseHas('some-table', [
+    'id' => 1
+]);
+```
 
 ## Changelog
 
