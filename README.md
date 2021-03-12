@@ -30,7 +30,7 @@ QueueFake::wrap(function () use (&$value) {
 
 # Usage
 
-Image you need to fake the queue to call your factories to setup your models, but also want to test a job:
+Imagine you need to fake the queue to call your factories to setup your models, but also want to test a job:
 
 ```php
 // Given
